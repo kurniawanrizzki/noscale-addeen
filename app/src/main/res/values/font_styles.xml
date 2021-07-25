@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="light_font_style">fonts/Lato-Light.ttf</string>
+    <string name="normal_font_style">fonts/Lato-Regular.ttf</string>
+    <string name="medium_font_style">fonts/Lato-Bold.ttf</string>
+</resources>
