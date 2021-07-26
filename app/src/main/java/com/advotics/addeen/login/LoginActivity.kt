@@ -1,14 +1,15 @@
 package com.advotics.addeen.login
 
 import android.os.Bundle
+import com.advotics.addeen.R
 import com.noscale.cerberus.base.BaseActivity
 
 class LoginActivity: BaseActivity<LoginContract.View, LoginContract.Presenter>() {
-    override var mIllustrationDescription: Int? = null
+    override var mIllustrationDescription: Int? = R.string.progress_description
 
-    override var mIllustrationSrc: Int? = null
+    override var mIllustrationSrc: Int? = R.raw.ic_progress
 
-    override var mIllustrationTitle: Int? = null
+    override var mIllustrationTitle: Int? = R.string.progress_title
 
     override var mView: LoginContract.View? = LoginFragment.newInstance()
 
@@ -16,6 +17,6 @@ class LoginActivity: BaseActivity<LoginContract.View, LoginContract.Presenter>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        showIllustration(false)
+        showIllustration = false
     }
 }
