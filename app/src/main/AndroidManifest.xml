@@ -20,12 +20,13 @@
             android:screenOrientation="portrait"
             >
             <intent-filter>
-                <action android:name="com.nosacle.addeen.dashboard.open" />
+                <action android:name="com.noscale.addeen.dashboard.open" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
         <activity android:name=".login.LoginActivity"
+            android:theme="@style/Theme.Addeen.NoActionBar"
             android:screenOrientation="portrait"
             >
             <intent-filter>
@@ -34,7 +35,17 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".other.OtherActivity"
+            android:screenOrientation="portrait"
+            >
+            <intent-filter>
+                <action android:name="com.noscale.addeen.profile.open" />
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
         <activity android:name=".SplashActivity"
+            android:theme="@style/Theme.Addeen.NoActionBar"
             android:screenOrientation="portrait"
             >
             <intent-filter>

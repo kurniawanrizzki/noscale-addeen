@@ -13,6 +13,12 @@
     <string name="progress_title">Loading</string>
     <string name="progress_description">Please wait. It may take a while</string>
 
+    <string name="profile_about_us">About Us</string>
+    <string name="profile_activities">Majlis Activities</string>
+    <string name="profile_logout">Log Out</string>
+
+    <string name="about_contact_us">Contact Us</string>
+
     <string name="tab_user">User</string>
     <string name="tab_recipients">Recipients</string>
     <string name="tab_scan">Scan</string>

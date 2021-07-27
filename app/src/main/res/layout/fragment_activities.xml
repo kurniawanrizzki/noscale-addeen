@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    >
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_activities_card"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/_13sdp"
+        app:cardCornerRadius="@dimen/_5sdp"
+        app:cardBackgroundColor="@color/white"
+        >
+        
+        <LinearLayout
+            android:id="@+id/ll_activities_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/_26sdp"
+            android:orientation="vertical">
+            
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_activities_image"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_200sdp"
+                android:adjustViewBounds="true"
+                />
+
+            <com.noscale.cerberus.ui.typography.ExtendedTextView
+                android:id="@+id/tv_activities_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:typography="caption"
+                tools:text="@tools:sample/lorem/random"
+                />
+            
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.core.widget.NestedScrollView>
