@@ -9,11 +9,13 @@ class AppConfiguration (mContext: Context) {
 
     private val mPreferenceEditor: SharedPreferences.Editor = mPreference?.edit()
 
-    var mUser: String?
+    var user: String?
         set(value) {
-            mPreferenceEditor?.putString(USER_KEY, value)
+            mPreferenceEditor?.putString(USER_KEY, value).commit()
         }
         get() = mPreference?.getString(USER_KEY, null)
+
+    var isAdmin: Boolean = user?.contains("admin") ?: false
 
     companion object {
         const val PREFERENCE_NAME_KEY = "ADDEEN_APP"

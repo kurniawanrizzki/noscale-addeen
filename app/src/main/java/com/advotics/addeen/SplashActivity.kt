@@ -13,7 +13,7 @@ class SplashActivity: AppCompatActivity() {
 
         Handler().postDelayed({
             var intent = Actions.openLoginIntent(this)
-            val user = AppConfiguration.getInstance(this).mUser
+            val user = AppConfiguration.getInstance(this).user
 
             user?.let {
                 intent = Actions.openDashboardIntent(this)

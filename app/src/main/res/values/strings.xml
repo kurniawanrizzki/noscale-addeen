@@ -5,10 +5,16 @@
     <string name="login_email">Email</string>
     <string name="login_password">Password</string>
     <string name="login_button">Login</string>
+    <string name="login_as_admin">Login as Admin</string>
 
     <string name="error_required_input">%1$s field is required.</string>
     <string name="error_email_format">Please enter your email address</string>
 
     <string name="progress_title">Loading</string>
     <string name="progress_description">Please wait. It may take a while</string>
+
+    <string name="tab_user">User</string>
+    <string name="tab_recipients">Recipients</string>
+    <string name="tab_scan">Scan</string>
+    <string name="tab_profile">Profile</string>
 </resources>
