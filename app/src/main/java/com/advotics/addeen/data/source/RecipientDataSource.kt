@@ -9,5 +9,5 @@ interface RecipientDataSource {
         fun onErrorCallback (e: ErrorCode)
     }
 
-    fun getRecipientList (pageNumber: Int, pageSize: Int, sort: String?, callback: RecipientListCallback)
+    fun getRecipientList (pageNumber: Int, pageSize: Int, sort: String?, year: Int?, callback: RecipientListCallback)
 }

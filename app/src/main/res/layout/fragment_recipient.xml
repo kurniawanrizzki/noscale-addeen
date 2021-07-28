@@ -12,13 +12,29 @@
     android:background="@color/background"
     >
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_recipient_data"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:itemCount="3"
-        tools:listitem="@layout/item_user"
-        />
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_recipient_data"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:itemCount="3"
+            tools:listitem="@layout/item_user"
+            />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_recipient_create"
+            android:layout_width="@dimen/_48sdp"
+            android:layout_height="@dimen/_48sdp"
+            android:layout_gravity="bottom|right"
+            android:layout_margin="@dimen/_13sdp"
+            android:src="@drawable/ic_add_white_24dp"
+            app:tint="@color/white"
+            />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </com.noscale.cerberus.ui.layouts.ConstraintWithIllustrationLayout>

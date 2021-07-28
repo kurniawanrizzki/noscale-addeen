@@ -6,7 +6,10 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.advotics.addeen.R
 import com.advotics.addeen.data.Recipient
+import com.advotics.addeen.data.RecipientPackage
+import com.advotics.addeen.utils.Actions
 import com.advotics.addeen.utils.SimpleRecyclerAdapter
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.noscale.cerberus.base.BaseFragment
 import com.noscale.cerberus.ui.layouts.ConstraintWithIllustrationLayout
@@ -24,7 +27,7 @@ class RecipientFragment: BaseFragment(), RecipientContract.View {
             val tvRole = holder?.itemView?.findViewById<ExtendedTextView>(R.id.tv_user_description)
 
             tvName?.text = item?.name
-            tvRole?.text = "Redeemed"
+            tvRole?.text = readStatusPackage(item?.recipientPackage)
         }
     })
 
@@ -32,6 +35,12 @@ class RecipientFragment: BaseFragment(), RecipientContract.View {
         super.onViewCreated(view, savedInstanceState)
 
         val rvData = view.findViewById<RecyclerView>(R.id.rv_recipient_data)
+        val fab = view.findViewById<FloatingActionButton>(R.id.fab_recipient_create)
+
+        fab?.setOnClickListener {
+            val intent = Actions.openCreationIntent(context!!, false)
+            startActivity(intent)
+        }
 
         rvData.adapter = mAdapter
     }
@@ -51,7 +60,10 @@ class RecipientFragment: BaseFragment(), RecipientContract.View {
         container.setIllustrationVisibility(false)
 
         showEmptyPage()
-        Snackbar.make(view!!, message, Snackbar.LENGTH_LONG).show()
+
+        view?.let {
+            Snackbar.make(it, message, Snackbar.LENGTH_LONG).show()
+        }
     }
 
     private fun showEmptyPage () {
@@ -61,6 +73,18 @@ class RecipientFragment: BaseFragment(), RecipientContract.View {
         container?.setIllustrationSrc(R.raw.ic_empty)
         container?.setIllustrationTitle(getString(R.string.empty_title))
         container?.setIllustrationDescription(getString(R.string.empty_description))
+    }
+
+    private fun readStatusPackage (r: RecipientPackage?): String? {
+        r?.let {
+            if (it.qrSentStatus && it.packageReceivedStatus) {
+                return getString(R.string.status_received)
+            } else if (it.qrSentStatus) {
+                return getString(R.string.status_broadcast_message)
+            }
+        }
+
+        return getString(R.string.status_register)
     }
 
     companion object {

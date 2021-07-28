@@ -11,6 +11,7 @@ interface RecipientContract {
     }
 
     interface Presenter: BasePresenter {
+        var year: Int?
         fun fetch (pageNumber: Int, pageSize: Int, sort: String?)
     }
 }

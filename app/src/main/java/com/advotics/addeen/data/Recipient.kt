@@ -36,6 +36,10 @@ data class Recipient(
     @Expose
     val year: String?,
 
+    @SerializedName("recipientPackage")
+    @Expose
+    val recipientPackage: RecipientPackage?,
+
     @SerializedName("createdAt")
     @Expose
     val createdAt: String?,

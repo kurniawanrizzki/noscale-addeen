@@ -100,7 +100,9 @@ class LoginFragment: BaseFragment(), LoginContract.View {
 
     override fun throwError(message: String) {
         showIllustration = false
-        Snackbar.make(view!!, message, Snackbar.LENGTH_LONG).show()
+        view?.let {
+            Snackbar.make(it, message, Snackbar.LENGTH_LONG).show()
+        }
     }
 
     companion object {

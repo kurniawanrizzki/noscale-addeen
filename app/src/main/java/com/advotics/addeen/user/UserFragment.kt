@@ -6,7 +6,9 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.advotics.addeen.R
 import com.advotics.addeen.data.Admin
+import com.advotics.addeen.utils.Actions
 import com.advotics.addeen.utils.SimpleRecyclerAdapter
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.noscale.cerberus.base.BaseFragment
 import com.noscale.cerberus.ui.layouts.ConstraintWithIllustrationLayout
@@ -33,6 +35,12 @@ class UserFragment: BaseFragment(), UserContract.View {
         super.onViewCreated(view, savedInstanceState)
 
         val rvData = view.findViewById<RecyclerView>(R.id.rv_user_data)
+        val fab = view.findViewById<FloatingActionButton>(R.id.fab_user_create)
+
+        fab?.setOnClickListener {
+            val intent = Actions.openCreationIntent(context!!, true)
+            startActivity(intent)
+        }
 
         rvData.adapter = mAdapter
     }
@@ -61,7 +69,9 @@ class UserFragment: BaseFragment(), UserContract.View {
         container.setIllustrationVisibility(false)
 
         showEmptyPage()
-        Snackbar.make(view!!, message, Snackbar.LENGTH_LONG).show()
+        view?.let {
+            Snackbar.make(it, message, Snackbar.LENGTH_LONG).show()
+        }
     }
 
     companion object {

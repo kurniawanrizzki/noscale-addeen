@@ -12,10 +12,11 @@ class RecipientDataRemoteSource: RecipientDataSource {
         pageNumber: Int,
         pageSize: Int,
         sort: String?,
+        year: Int?,
         callback: RecipientDataSource.RecipientListCallback
     ) {
-        val fixSort = sort ?: "asc"
-        val response = APIService.getInstance()?.mRecipientApi?.getRecipients(pageNumber, pageSize, fixSort)
+        val fixSort = sort ?: "recipientYear"
+        val response = APIService.getInstance()?.mRecipientApi?.getRecipients(pageNumber, pageSize, fixSort, year)
         response?.enqueue(object: Callback<RecipientListResponse> {
             override fun onResponse(
                 call: Call<RecipientListResponse>,

@@ -2,13 +2,22 @@
     <string name="app_name">Addeen</string>
     <string name="app_copyright">Copyright © Noscale - 2021\n All right reserved</string>
 
+    <string name="login_name">Name</string>
     <string name="login_email">Email</string>
     <string name="login_password">Password</string>
+    <string name="login_gender">Gender</string>
+    <string name="login_phone">Phone</string>
     <string name="login_button">Login</string>
     <string name="login_as_admin">Login as Admin</string>
+    <string name="login_pick_image">Pick Image</string>
+    <string name="login_add">Add</string>
+
+    <string name="submit_button">Submit</string>
+    <string name="cancel_button">Cancel</string>
 
     <string name="error_required_input">%1$s field is required.</string>
     <string name="error_email_format">Please enter your email address</string>
+    <string name="error_phone_format">Value must be in Indonesia mobile number format eg. 6281911111111</string>
 
     <string name="progress_title">Loading</string>
     <string name="progress_description">Please wait. It may take a while</string>
@@ -26,4 +35,13 @@
 
     <string name="empty_title">Oops.. There is no record</string>
     <string name="empty_description">The record you\'re looking for does not seem to exist</string>
+
+    <string name="status_received">Redeemed</string>
+    <string name="status_broadcast_message">QR already broadcast</string>
+    <string name="status_register">Registered</string>
+
+    <string-array name="form_gender">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
 </resources>

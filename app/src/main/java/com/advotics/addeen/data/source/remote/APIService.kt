@@ -1,6 +1,7 @@
 package com.advotics.addeen.data.source.remote
 
 import com.advotics.addeen.data.source.remote.admin.AdminApi
+import com.advotics.addeen.data.source.remote.creation.CreationApi
 import com.advotics.addeen.data.source.remote.login.LoginApi
 import com.advotics.addeen.data.source.remote.recipient.RecipientApi
 import retrofit2.Retrofit
@@ -16,6 +17,8 @@ class APIService {
 
     val mRecipientApi: RecipientApi
 
+    val mCreationApi: CreationApi
+
     init {
         val client = Retrofit.Builder()
             .baseUrl(BASE_URL)
@@ -25,6 +28,7 @@ class APIService {
         mLoginApi = client.create(LoginApi::class.java)
         mAdminApi = client.create(AdminApi::class.java)
         mRecipientApi = client.create(RecipientApi::class.java)
+        mCreationApi = client.create(CreationApi::class.java)
     }
 
     companion object {

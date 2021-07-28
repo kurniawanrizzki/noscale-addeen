@@ -17,6 +17,7 @@ import com.advotics.addeen.user.UserPresenter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.noscale.cerberus.base.BaseFragment
+import com.noscale.cerberus.ui.typography.ExtendedTextView
 
 class MainFragment: BaseFragment(), MainContract.View {
     override var mPresenter: MainContract.Presenter? = null
@@ -44,7 +45,8 @@ class MainFragment: BaseFragment(), MainContract.View {
                     else -> text = getString(R.string.tab_profile)
                 }
 
-                appCompatActivity?.supportActionBar?.title = text
+                val tvTitle = appCompatActivity?.findViewById<ExtendedTextView>(R.id.toolbar_title)
+                tvTitle.text = text
             }
         })
 

@@ -12,5 +12,8 @@ object Actions {
     fun openProfileMenuIntent (context: Context, opt: Int) = internalIntent(context, "com.noscale.addeen.profile.open")
         .putExtra(Property.PROFILE_MENU_ARG, opt)
 
+    fun openCreationIntent (context: Context, isCreationAdmin: Boolean) = internalIntent(context, "com.noscale.addeen.creation.open")
+        .putExtra(Property.ADMIN_CREATION_ARG, isCreationAdmin)
+
     private fun internalIntent(context: Context, action: String): Intent = Intent(action).setPackage(context.packageName)
 }

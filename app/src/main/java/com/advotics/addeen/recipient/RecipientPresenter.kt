@@ -6,13 +6,14 @@ import com.advotics.addeen.data.source.remote.recipient.RecipientDataRemoteSourc
 import com.advotics.addeen.utils.ErrorCode
 
 class RecipientPresenter (val mView: RecipientContract.View?): RecipientContract.Presenter {
+    override var year: Int? = null
 
     init {
         mView?.mPresenter = this
     }
 
     override fun fetch(pageNumber: Int, pageSize: Int, sort: String?) {
-        RecipientDataRemoteSource.getInstance().getRecipientList(pageNumber, pageSize, sort, object: RecipientDataSource.RecipientListCallback {
+        RecipientDataRemoteSource.getInstance().getRecipientList(pageNumber, pageSize, sort, year, object: RecipientDataSource.RecipientListCallback {
             override fun onLoadCallback(data: List<Recipient>) {
                 mView?.append(data)
             }

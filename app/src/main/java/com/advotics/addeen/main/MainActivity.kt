@@ -1,6 +1,8 @@
 package com.advotics.addeen.main
 
 import android.os.Bundle
+import androidx.appcompat.widget.Toolbar
+import com.advotics.addeen.R
 import com.advotics.addeen.utils.Property
 import com.noscale.cerberus.base.BaseActivity
 
@@ -20,6 +22,8 @@ class MainActivity : BaseActivity<MainContract.View, MainContract.Presenter>() {
 
         super.onCreate(savedInstanceState)
         showIllustration = false
+
+        setSupportActionBar(findViewById(R.id.toolbar))
     }
 
     override fun onSupportNavigateUp(): Boolean {
