@@ -10,8 +10,10 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.advotics.addeen.R
 import com.advotics.addeen.recipient.RecipientFragment
+import com.advotics.addeen.recipient.RecipientPresenter
 import com.advotics.addeen.scan.ScanFragment
 import com.advotics.addeen.user.UserFragment
+import com.advotics.addeen.user.UserPresenter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.noscale.cerberus.base.BaseFragment
@@ -76,9 +78,15 @@ class MainFragment: BaseFragment(), MainContract.View {
         override fun getItemCount(): Int = itemCount
 
         override fun createFragment(position: Int): Fragment {
+            val userFragment = UserFragment.newInstance()
+            UserPresenter(userFragment)
+
+            val recipientFragment = RecipientFragment.newInstance()
+            RecipientPresenter(recipientFragment)
+
             return when (position) {
-                0 -> UserFragment.newInstance()
-                1 -> RecipientFragment.newInstance()
+                0 -> userFragment
+                1 -> recipientFragment
                 2 -> ScanFragment.newInstance()
                 else -> ProfileFragment.newInstance()
             }

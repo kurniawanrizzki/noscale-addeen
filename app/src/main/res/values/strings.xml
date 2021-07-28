@@ -23,4 +23,7 @@
     <string name="tab_recipients">Recipients</string>
     <string name="tab_scan">Scan</string>
     <string name="tab_profile">Profile</string>
+
+    <string name="empty_title">Oops.. There is no record</string>
+    <string name="empty_description">The record you\'re looking for does not seem to exist</string>
 </resources>

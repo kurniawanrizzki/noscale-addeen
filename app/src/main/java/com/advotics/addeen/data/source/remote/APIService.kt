@@ -1,6 +1,8 @@
 package com.advotics.addeen.data.source.remote
 
+import com.advotics.addeen.data.source.remote.admin.AdminApi
 import com.advotics.addeen.data.source.remote.login.LoginApi
+import com.advotics.addeen.data.source.remote.recipient.RecipientApi
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -10,6 +12,10 @@ class APIService {
 
     val mLoginApi: LoginApi
 
+    val mAdminApi: AdminApi
+
+    val mRecipientApi: RecipientApi
+
     init {
         val client = Retrofit.Builder()
             .baseUrl(BASE_URL)
@@ -17,6 +23,8 @@ class APIService {
             .build()
 
         mLoginApi = client.create(LoginApi::class.java)
+        mAdminApi = client.create(AdminApi::class.java)
+        mRecipientApi = client.create(RecipientApi::class.java)
     }
 
     companion object {

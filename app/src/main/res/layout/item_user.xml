@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_7sdp"
+    app:cardCornerRadius="@dimen/_5sdp"
+    app:cardBackgroundColor="@color/white"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_user_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/_7sdp"
+        android:paddingBottom="@dimen/_7sdp"
+        android:paddingLeft="@dimen/_13sdp"
+        android:paddingRight="@dimen/_13sdp"
+        >
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_user_profile"
+            android:layout_width="@dimen/_26sdp"
+            android:layout_height="@dimen/_26sdp"
+            android:adjustViewBounds="true"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_user_name"
+            app:layout_constraintBottom_toBottomOf="@id/tv_user_description"
+            />
+
+        <com.noscale.cerberus.ui.typography.ExtendedTextView
+            android:id="@+id/tv_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginLeft="@dimen/_13sdp"
+            app:layout_constraintLeft_toRightOf="@id/iv_user_profile"
+            app:typography="subtitle_1"
+            tools:text="@tools:sample/lorem"
+            />
+
+        <com.noscale.cerberus.ui.typography.ExtendedTextView
+            android:id="@+id/tv_user_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/iv_user_profile"
+            app:layout_constraintLeft_toLeftOf="@id/tv_user_name"
+            android:textColor="@color/grey"
+            app:typography="caption"
+            tools:text="@tools:sample/lorem"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
