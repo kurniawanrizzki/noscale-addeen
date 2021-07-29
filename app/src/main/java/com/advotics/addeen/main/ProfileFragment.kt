@@ -2,13 +2,15 @@ package com.advotics.addeen.main
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.advotics.addeen.R
-import com.advotics.addeen.utils.Actions
-import com.advotics.addeen.utils.Property
-import com.advotics.addeen.utils.SimpleRecyclerAdapter
+import com.advotics.addeen.data.Recipient
+import com.advotics.addeen.utils.*
 import com.noscale.cerberus.base.BaseFragment
 import com.noscale.cerberus.ui.typography.ExtendedTextView
+import com.squareup.picasso.Picasso
 
 class ProfileFragment: BaseFragment(), MainContract.View {
     override var mPresenter: MainContract.Presenter? = null
@@ -20,6 +22,7 @@ class ProfileFragment: BaseFragment(), MainContract.View {
 
         val menus = Property.ProfileMenu.values().toMutableList()
 
+        val ivProfile = view.findViewById<AppCompatImageView>(R.id.iv_profile_photo)
         val tvInfo = view.findViewById<ExtendedTextView>(R.id.tv_profile_info)
         val rvMenu = view.findViewById<RecyclerView>(R.id.rv_profile_menu)
         rvMenu.adapter = SimpleRecyclerAdapter(menus, R.layout.item_profile_menu, object: SimpleRecyclerAdapter.OnViewHolder<Property.ProfileMenu> {
@@ -37,6 +40,20 @@ class ProfileFragment: BaseFragment(), MainContract.View {
             }
 
         })
+
+        getRecipient()?.let { item ->
+            Picasso.get()
+                .load(item.photo)
+                .placeholder(ContextCompat.getDrawable(context!!, R.drawable.ic_user_profile)!!)
+                .into(ivProfile)
+        }
+    }
+
+    private fun getRecipient(): Recipient? {
+        val user = AppConfiguration.getInstance(context!!).user
+        if (user?.contains("recipient")!!) return AppHelper.fromJson(user)
+
+        return null
     }
 
     companion object {

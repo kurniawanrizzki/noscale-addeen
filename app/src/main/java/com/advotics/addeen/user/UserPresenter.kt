@@ -4,8 +4,13 @@ import com.advotics.addeen.data.Admin
 import com.advotics.addeen.data.source.AdminDataSource
 import com.advotics.addeen.data.source.remote.admin.AdminDataRemoteSource
 import com.advotics.addeen.utils.ErrorCode
+import java.util.concurrent.atomic.AtomicInteger
 
-class UserPresenter (val mView: UserContract.View?): UserContract.Presenter {
+class UserPresenter (val mView: UserContract.View?, var isDataMissing: Boolean): UserContract.Presenter {
+
+    private val mPageNumber: AtomicInteger = AtomicInteger(0)
+
+    private var alreadyLastPage = false
 
     init {
         mView?.mPresenter = this
@@ -14,7 +19,15 @@ class UserPresenter (val mView: UserContract.View?): UserContract.Presenter {
     override fun fetch(pageNumber: Int, pageSize: Int) {
         AdminDataRemoteSource.getInstance().getAdminList(pageNumber, pageSize, object: AdminDataSource.AdminListCallback {
             override fun onLoadCallback(data: List<Admin>) {
+                if (data.isEmpty()) {
+                    alreadyLastPage = true
+                    return
+                }
+
                 mView?.append(data)
+                mPageNumber?.getAndIncrement()
+
+                isDataMissing = false
             }
 
             override fun onErrorCallback(e: ErrorCode) {
@@ -25,6 +38,6 @@ class UserPresenter (val mView: UserContract.View?): UserContract.Presenter {
     }
 
     override fun start() {
-        fetch(0, 10)
+        if (isDataMissing) fetch(mPageNumber?.get(), 10)
     }
 }

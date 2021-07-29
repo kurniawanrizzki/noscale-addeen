@@ -3,6 +3,7 @@ package com.advotics.addeen.recipient
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.advotics.addeen.R
 import com.advotics.addeen.data.Recipient
@@ -14,6 +15,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.noscale.cerberus.base.BaseFragment
 import com.noscale.cerberus.ui.layouts.ConstraintWithIllustrationLayout
 import com.noscale.cerberus.ui.typography.ExtendedTextView
+import com.squareup.picasso.Picasso
 
 class RecipientFragment: BaseFragment(), RecipientContract.View {
     override var mPresenter: RecipientContract.Presenter? = null
@@ -28,6 +30,10 @@ class RecipientFragment: BaseFragment(), RecipientContract.View {
 
             tvName?.text = item?.name
             tvRole?.text = readStatusPackage(item?.recipientPackage)
+            Picasso.get()
+                .load(item?.photo)
+                .placeholder(ContextCompat.getDrawable(context!!, R.drawable.ic_user_profile)!!)
+                .into(ivProfile)
         }
     })
 

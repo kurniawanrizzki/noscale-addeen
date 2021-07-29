@@ -29,14 +29,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_200sdp"
                 android:adjustViewBounds="true"
+                android:visibility="gone"
                 />
 
             <com.noscale.cerberus.ui.typography.ExtendedTextView
                 android:id="@+id/tv_activities_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="Masjid Jami Nurul Hidayah berdiri ditengah pemukiman, berdiri sejak tahun 1988. Beralamat di JL.Tanah Kusir HKSN RT 007 / RW 011, saat ini masih berdiri megah dan menjadi tempat beribadah bagi warga sekitar khususnya umat muslim. Masjid Jami Nurul Hidayah rutin melakukan kegiatan sosial untuk warga sekitar, dan selalu berusaha untuk memberikan kenyamaman bagi jama'ah yang akan beribadah."
                 app:typography="caption"
-                tools:text="@tools:sample/lorem/random"
                 />
             
         </LinearLayout>

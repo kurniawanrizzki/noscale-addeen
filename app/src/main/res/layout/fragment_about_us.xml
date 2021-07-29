@@ -51,74 +51,12 @@
                     android:layout_marginBottom="@dimen/_13sdp"
                     app:typography="subtitle_1"/>
 
-                <LinearLayout
-                    android:id="@+id/ll_about_ig"
+                <com.noscale.cerberus.ui.typography.ExtendedTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/_13sdp"
-                    android:orientation="horizontal">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="@dimen/_26sdp"
-                        android:layout_height="@dimen/_26sdp"
-                        android:adjustViewBounds="true"
-                        />
-
-                    <com.noscale.cerberus.ui.typography.ExtendedTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        app:typography="caption"
-                        tools:text="Adeeen"
-                        />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/ll_about_fb"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/_13sdp"
-                    android:orientation="horizontal">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="@dimen/_26sdp"
-                        android:layout_height="@dimen/_26sdp"
-                        android:adjustViewBounds="true"
-                        />
-
-                    <com.noscale.cerberus.ui.typography.ExtendedTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        app:typography="caption"
-                        tools:text="Adeeen"
-                        />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/ll_about_whatsapp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/_13sdp"
-                    android:orientation="horizontal">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="@dimen/_26sdp"
-                        android:layout_height="@dimen/_26sdp"
-                        android:adjustViewBounds="true"
-                        />
-
-                    <com.noscale.cerberus.ui.typography.ExtendedTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        app:typography="caption"
-                        tools:text="+62 8128 2395 560"
-                        />
-
-                </LinearLayout>
+                    android:text="@string/about_contact_us_content"
+                    app:typography="caption"
+                    />
 
             </LinearLayout>
 

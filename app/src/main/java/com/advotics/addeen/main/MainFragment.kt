@@ -79,18 +79,27 @@ class MainFragment: BaseFragment(), MainContract.View {
     class ViewPagerAdapter(activity: FragmentActivity?, private val itemCount: Int): FragmentStateAdapter(activity!!) {
         override fun getItemCount(): Int = itemCount
 
-        override fun createFragment(position: Int): Fragment {
-            val userFragment = UserFragment.newInstance()
-            UserPresenter(userFragment)
+        private val userFragment = UserFragment.newInstance()
 
-            val recipientFragment = RecipientFragment.newInstance()
-            RecipientPresenter(recipientFragment)
+        private val recipientFragment = RecipientFragment.newInstance()
+
+        private val scanFragment = ScanFragment.newInstance()
+
+        private val profileFragment = ProfileFragment.newInstance()
+
+        init {
+            UserPresenter(userFragment,true)
+            RecipientPresenter(recipientFragment, true)
+        }
+
+        override fun createFragment(position: Int): Fragment {
+
 
             return when (position) {
                 0 -> userFragment
                 1 -> recipientFragment
-                2 -> ScanFragment.newInstance()
-                else -> ProfileFragment.newInstance()
+                2 -> scanFragment
+                else -> profileFragment
             }
         }
     }

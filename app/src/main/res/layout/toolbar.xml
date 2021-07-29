@@ -9,13 +9,45 @@
     app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
     tools:ignore="PrivateResource">
 
-    <com.noscale.cerberus.ui.typography.ExtendedTextView
-        android:id="@+id/toolbar_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        app:typography="h6"
-        tools:text="@tools:sample/lorem"
-        />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/toolbar_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@id/toolbar_title"
+            app:srcCompat="@drawable/ic_arrow_back"
+            android:visibility="gone"
+            />
+
+        <com.noscale.cerberus.ui.typography.ExtendedTextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_7sdp"
+            android:textColor="@color/white"
+            app:typography="h6"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/toolbar_back"
+            tools:text="@tools:sample/lorem"
+            />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/toolbar_tool"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:layout_marginRight="@dimen/_13sdp"
+            app:layout_constraintTop_toTopOf="@id/toolbar_title"
+            app:layout_constraintRight_toRightOf="parent"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.appcompat.widget.Toolbar>

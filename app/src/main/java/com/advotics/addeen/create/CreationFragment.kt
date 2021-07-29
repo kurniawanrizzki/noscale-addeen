@@ -26,6 +26,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
 import com.noscale.cerberus.base.BaseFragment
 import com.noscale.cerberus.ui.layouts.ConstraintWithIllustrationLayout
+import com.noscale.cerberus.ui.widgets.IllustrationView
 import java.util.regex.Pattern
 
 
@@ -34,12 +35,19 @@ class CreationFragment: BaseFragment(), CreationContract.View {
 
     var capturedPhoto: Bitmap? = null
 
+    var mIllustrationView: IllustrationView? = null
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         val isAdminCreation = activity?.intent?.getBooleanExtra(Property.ADMIN_CREATION_ARG, false)
 
         mLayoutResource = if (isAdminCreation!!) R.layout.fragment_admin_creation
         else R.layout.fragment_recipient_creation
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        mIllustrationView = activity?.findViewById(R.id.cwi_illustration_id)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -81,8 +89,8 @@ class CreationFragment: BaseFragment(), CreationContract.View {
             val isPhoneFilled = isPhoneNumberValidated(ilPhone)
 
             if (isNameFilled && isEmailFilled && isPhoneFilled && (null != capturedPhoto)) {
-                val container = view as ConstraintWithIllustrationLayout
-                container?.setIllustrationVisibility(true)
+                mIllustrationView?.visibility = View.VISIBLE
+                view?.visibility = View.GONE
 
                 val capturedPhotoInBase64 = AppHelper.getResizedBitmapInBase64(capturedPhoto!!)
                 val user = AppHelper.fromJson<Admin>(AppConfiguration.getInstance(context!!).user!!)
@@ -119,8 +127,8 @@ class CreationFragment: BaseFragment(), CreationContract.View {
             val isPasswordFilled = isInputValidated(ilPassword)
 
             if (isNameFilled && isEmailFilled && isPasswordFilled) {
-                val container = view as ConstraintWithIllustrationLayout
-                container?.setIllustrationVisibility(true)
+                mIllustrationView?.visibility = View.VISIBLE
+                view?.visibility = View.GONE
 
                 val name = ilName?.editText?.text.toString()
                 val email = ilEmail?.editText?.text.toString()
@@ -134,12 +142,15 @@ class CreationFragment: BaseFragment(), CreationContract.View {
     }
 
     override fun onCreationSuccess() {
+        mIllustrationView?.visibility = View.GONE
+        view?.visibility = View.VISIBLE
+
         activity?.finish()
     }
 
     override fun throwError(message: String) {
-        val container = view as ConstraintWithIllustrationLayout
-        container?.setIllustrationVisibility(false)
+        mIllustrationView?.visibility = View.GONE
+        view?.visibility = View.VISIBLE
 
         view?.let {
             Snackbar.make(it, message, Snackbar.LENGTH_LONG).show()
