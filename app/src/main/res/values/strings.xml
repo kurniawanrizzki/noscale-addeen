@@ -41,6 +41,13 @@
     <string name="status_broadcast_message">QR already broadcast</string>
     <string name="status_register">Registered</string>
 
+    <string name="filter_title">Report</string>
+    <string name="filter_year">Year</string>
+    <string name="filter_print">Print this page</string>
+
+    <string name="menu_report">Send Report</string>
+    <string name="menu_filter">Filter</string>
+
     <string-array name="form_gender">
         <item>Male</item>
         <item>Female</item>

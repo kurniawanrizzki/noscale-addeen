@@ -47,4 +47,6 @@ data class Recipient(
     @SerializedName("updatedAt")
     @Expose
     val updatedAt: String?
-)
+) {
+    constructor() : this (0, "", "", "", "", "", "", "", null, "", "")
+}

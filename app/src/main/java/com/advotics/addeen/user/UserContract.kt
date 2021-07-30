@@ -8,9 +8,13 @@ interface UserContract {
     interface View: BaseView<Presenter> {
         fun append (data: List<Admin>)
         fun throwError (message: String)
+        fun addLoadingItem ()
+        fun removeLoadingItem ()
     }
 
     interface Presenter: BasePresenter {
-        fun fetch (pageNumber: Int, pageSize: Int)
+        var isLastPage: Boolean
+
+        fun fetch ()
     }
 }

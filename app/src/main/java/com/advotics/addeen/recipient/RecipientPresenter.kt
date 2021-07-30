@@ -4,6 +4,7 @@ import com.advotics.addeen.data.Recipient
 import com.advotics.addeen.data.source.RecipientDataSource
 import com.advotics.addeen.data.source.remote.recipient.RecipientDataRemoteSource
 import com.advotics.addeen.utils.ErrorCode
+import com.advotics.addeen.utils.PaginationListener
 import java.util.concurrent.atomic.AtomicInteger
 
 class RecipientPresenter (val mView: RecipientContract.View?, var isDataMissing: Boolean): RecipientContract.Presenter {
@@ -11,19 +12,21 @@ class RecipientPresenter (val mView: RecipientContract.View?, var isDataMissing:
 
     private val mPageNumber: AtomicInteger = AtomicInteger(0)
 
-    private var alreadyLastPage = false
+    override var isLastPage: Boolean = false
 
     init {
         mView?.mPresenter = this
     }
 
-    override fun fetch(pageNumber: Int, pageSize: Int, sort: String?) {
-        if (alreadyLastPage) return
+    override fun fetch() {
+        if (isLastPage) return
+        mView?.addLoadingItem()
 
-        RecipientDataRemoteSource.getInstance().getRecipientList(pageNumber, pageSize, sort, year, object: RecipientDataSource.RecipientListCallback {
+        RecipientDataRemoteSource.getInstance().getRecipientList(mPageNumber.get(), PaginationListener.PAGE_SIZE, null, year, object: RecipientDataSource.RecipientListCallback {
             override fun onLoadCallback(data: List<Recipient>) {
                 if (data.isEmpty()) {
-                    alreadyLastPage = true
+                    isLastPage = true
+                    mView?.removeLoadingItem()
                     return
                 }
 
@@ -40,6 +43,6 @@ class RecipientPresenter (val mView: RecipientContract.View?, var isDataMissing:
     }
 
     override fun start() {
-        if (isDataMissing) fetch(mPageNumber.get(), 10, null)
+        if (isDataMissing) fetch()
     }
 }

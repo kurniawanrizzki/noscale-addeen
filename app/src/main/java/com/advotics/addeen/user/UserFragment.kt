@@ -3,11 +3,14 @@ package com.advotics.addeen.user
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.advotics.addeen.R
 import com.advotics.addeen.data.Admin
 import com.advotics.addeen.utils.Actions
+import com.advotics.addeen.utils.PaginationListener
 import com.advotics.addeen.utils.SimpleRecyclerAdapter
+import com.advotics.addeen.utils.SimpleScrollRecyclerAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.noscale.cerberus.base.BaseFragment
@@ -20,7 +23,9 @@ class UserFragment: BaseFragment(), UserContract.View {
 
     override var mPresenter: UserContract.Presenter? = null
 
-    private val mAdapter = SimpleRecyclerAdapter(mutableListOf(), R.layout.item_user, object: SimpleRecyclerAdapter.OnViewHolder<Admin> {
+    private var isPageScrolled = false
+
+    private val mAdapter = SimpleScrollRecyclerAdapter(mutableListOf(), R.layout.item_user, object: SimpleRecyclerAdapter.OnViewHolder<Admin> {
         override fun onBindView(holder: SimpleRecyclerAdapter.SimpleViewHolder?, item: Admin?) {
             val ivProfile = holder?.itemView?.findViewById<AppCompatImageView>(R.id.iv_user_profile)
             val tvName = holder?.itemView?.findViewById<ExtendedTextView>(R.id.tv_user_name)
@@ -37,6 +42,17 @@ class UserFragment: BaseFragment(), UserContract.View {
         val rvData = view.findViewById<RecyclerView>(R.id.rv_user_data)
         val fab = view.findViewById<FloatingActionButton>(R.id.fab_user_create)
 
+        rvData?.setOnScrollListener(object: PaginationListener(rvData.layoutManager as LinearLayoutManager) {
+
+            override fun loadMoreItems() {
+                mPresenter?.fetch()
+            }
+
+            override fun isLastPage(): Boolean = mPresenter?.isLastPage!!
+
+            override fun isLoading(): Boolean = isPageScrolled
+        })
+
         fab?.setOnClickListener {
             val intent = Actions.openCreationIntent(context!!, true)
             startActivity(intent)
@@ -46,6 +62,8 @@ class UserFragment: BaseFragment(), UserContract.View {
     }
 
     override fun append(data: List<Admin>) {
+        removeLoadingItem()
+
         val container = view as ConstraintWithIllustrationLayout
         container.setIllustrationVisibility(false)
 
@@ -72,6 +90,18 @@ class UserFragment: BaseFragment(), UserContract.View {
         view?.let {
             Snackbar.make(it, message, Snackbar.LENGTH_LONG).show()
         }
+
+        removeLoadingItem()
+    }
+
+    override fun addLoadingItem() {
+        isPageScrolled = true
+        mAdapter?.addLoading(Admin())
+    }
+
+    override fun removeLoadingItem() {
+        isPageScrolled = false
+        mAdapter?.removeLoading()
     }
 
     companion object {

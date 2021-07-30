@@ -8,10 +8,14 @@ interface RecipientContract {
     interface View: BaseView<Presenter> {
         fun append (data: List<Recipient>)
         fun throwError (message: String)
+        fun addLoadingItem ()
+        fun removeLoadingItem ()
     }
 
     interface Presenter: BasePresenter {
+        var isLastPage: Boolean
         var year: Int?
-        fun fetch (pageNumber: Int, pageSize: Int, sort: String?)
+
+        fun fetch ()
     }
 }

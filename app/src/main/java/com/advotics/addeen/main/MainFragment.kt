@@ -1,8 +1,13 @@
 package com.advotics.addeen.main
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
+import android.widget.PopupMenu
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -14,10 +19,13 @@ import com.advotics.addeen.recipient.RecipientPresenter
 import com.advotics.addeen.scan.ScanFragment
 import com.advotics.addeen.user.UserFragment
 import com.advotics.addeen.user.UserPresenter
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.android.material.textfield.TextInputLayout
 import com.noscale.cerberus.base.BaseFragment
 import com.noscale.cerberus.ui.typography.ExtendedTextView
+import java.util.*
 
 class MainFragment: BaseFragment(), MainContract.View {
     override var mPresenter: MainContract.Presenter? = null
@@ -36,16 +44,26 @@ class MainFragment: BaseFragment(), MainContract.View {
         viewPager?.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 val appCompatActivity: AppCompatActivity = activity as AppCompatActivity
+                val tvTitle = appCompatActivity?.findViewById<ExtendedTextView>(R.id.toolbar_title)
+                val ivTool = appCompatActivity?.findViewById<AppCompatImageView>(R.id.toolbar_tool)
+
                 var text: String
 
                 when (position) {
                     0 -> text = getString(R.string.tab_user)
-                    1 -> text = getString(R.string.tab_recipients)
+                    1 -> {
+                        ivTool?.visibility = View.VISIBLE
+                        ivTool.setImageDrawable(ContextCompat.getDrawable(context!!, R.drawable.ic_dots))
+                        ivTool.setOnClickListener {
+                            getPopup(it)
+                        }
+
+                        text = getString(R.string.tab_recipients)
+                    }
                     2 -> text = getString(R.string.tab_scan)
                     else -> text = getString(R.string.tab_profile)
                 }
 
-                val tvTitle = appCompatActivity?.findViewById<ExtendedTextView>(R.id.toolbar_title)
                 tvTitle.text = text
             }
         })
@@ -70,6 +88,51 @@ class MainFragment: BaseFragment(), MainContract.View {
                 }
             }
         }.attach()
+    }
+
+    private fun getFilter (): BottomSheetDialog {
+        val dialog = BottomSheetDialog(context!!)
+        dialog.setContentView(R.layout.dialog_filter)
+
+        val years = getYears()
+        val ilYear = dialog?.findViewById<TextInputLayout>(R.id.il_filter_year)
+        val etYear = ilYear?.editText as? AutoCompleteTextView
+        val adapter = ArrayAdapter(requireContext(), R.layout.item_list, years)
+
+        etYear?.setAdapter(adapter)
+        etYear?.setText(years[years.size - 1].toString(), false)
+
+        return dialog
+    }
+
+    @SuppressLint("RestrictedApi")
+    private fun getPopup (v: View) {
+        val menu = PopupMenu(context, v)
+        menu.menuInflater.inflate(R.menu.popup, menu.menu)
+        menu?.show()
+
+        menu.setOnMenuItemClickListener {
+            when(it.itemId) {
+                R.id.menu_report -> {
+                    return@setOnMenuItemClickListener true
+                }
+                else -> {
+                    getFilter().show()
+                    return@setOnMenuItemClickListener true
+                }
+            }
+        }
+    }
+
+    private fun getYears (): MutableList<Int> {
+        val years = mutableListOf<Int>()
+        val current = Calendar.getInstance().get(Calendar.YEAR)
+
+        for (i in 2000..current) {
+            years.add(i)
+        }
+
+        return years
     }
 
     companion object {

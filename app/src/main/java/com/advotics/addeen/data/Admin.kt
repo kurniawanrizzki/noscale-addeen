@@ -27,4 +27,6 @@ data class Admin(
     @SerializedName("updatedAt")
     @Expose
     val updatedAt: String?
-)
+) {
+    constructor() : this(0, "", "", "", "", "")
+}

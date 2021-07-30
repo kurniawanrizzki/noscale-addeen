@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
 
-class SimpleRecyclerAdapter<T>(
+open class SimpleRecyclerAdapter<T>(
     var mMainData: MutableList<T>?,
     private val mLayoutRes: Int,
     private val mListener: OnViewHolder<T>
@@ -36,7 +36,7 @@ class SimpleRecyclerAdapter<T>(
         mMainData?.add(item)
     }
 
-    class SimpleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    open class SimpleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     interface OnViewHolder<T> {
         fun onBindView(holder: SimpleViewHolder?, item: T?)
