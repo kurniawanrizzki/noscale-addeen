@@ -24,7 +24,7 @@ class RecipientDataRemoteSource: RecipientDataSource {
                 call: Call<RecipientListResponse>,
                 response: Response<RecipientListResponse>
             ) {
-                val recipientList = response.body()?.data
+                val recipientList = response.body()
 
                 recipientList?.let {
                     callback.onLoadCallback(it)

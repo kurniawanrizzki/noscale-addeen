@@ -21,9 +21,9 @@ class AdminDataRemoteSource: AdminDataSource {
                 call: Call<AdminListResponse>,
                 response: Response<AdminListResponse>
             ) {
-                val adminList = response.body()?.data
+                val admintResponse = response.body()
 
-                adminList?.let {
+                admintResponse?.let {
                     callback.onLoadCallback(it)
                     return
                 }

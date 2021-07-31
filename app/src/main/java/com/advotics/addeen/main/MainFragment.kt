@@ -44,6 +44,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import androidx.core.content.FileProvider
 import com.advotics.addeen.data.Admin
+import com.advotics.addeen.data.source.remote.recipient.RecipientListResponse
 import com.advotics.addeen.scan.ScanPresenter
 import com.advotics.addeen.utils.AppConfiguration
 import com.advotics.addeen.utils.AppHelper
@@ -140,8 +141,10 @@ class MainFragment: BaseFragment(), MainContract.View {
         bPrint?.setOnClickListener {
             val year = etYear?.text.toString().toInt()
             RecipientDataRemoteSource.getInstance().getRecipientList(null, null, null, year,  object: RecipientDataSource.RecipientListCallback {
-                override fun onLoadCallback(data: List<Recipient>) {
+                override fun onLoadCallback(response: RecipientListResponse) {
                     dialog.dismiss()
+
+                    val data = response.data
 
                     if (data.isEmpty()) {
                         Snackbar.make(view!!, ErrorCode.NO_RESULTS.message, Snackbar.LENGTH_LONG).show()
@@ -230,7 +233,8 @@ class MainFragment: BaseFragment(), MainContract.View {
     private fun prepareReport () {
         val year = SimpleDateFormat("YYYY").format(Date()).toInt()
         RecipientDataRemoteSource.getInstance().getRecipientList(null, null, null, year,  object: RecipientDataSource.RecipientListCallback {
-            override fun onLoadCallback(data: List<Recipient>) {
+            override fun onLoadCallback(response: RecipientListResponse) {
+                val data = response.data
 
                 if (data.isEmpty()) {
                     Snackbar.make(view!!, ErrorCode.NO_RESULTS.message, Snackbar.LENGTH_LONG).show()

@@ -2,11 +2,12 @@ package com.advotics.addeen.data.source
 
 import com.advotics.addeen.data.Recipient
 import com.advotics.addeen.data.RecipientPackage
+import com.advotics.addeen.data.source.remote.recipient.RecipientListResponse
 import com.advotics.addeen.utils.ErrorCode
 
 interface RecipientDataSource {
     interface RecipientListCallback {
-        fun onLoadCallback (data: List<Recipient>)
+        fun onLoadCallback (response: RecipientListResponse)
         fun onErrorCallback (e: ErrorCode)
     }
 

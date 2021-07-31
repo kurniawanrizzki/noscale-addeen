@@ -3,6 +3,7 @@ package com.advotics.addeen.recipient
 import com.advotics.addeen.data.Recipient
 import com.advotics.addeen.data.source.RecipientDataSource
 import com.advotics.addeen.data.source.remote.recipient.RecipientDataRemoteSource
+import com.advotics.addeen.data.source.remote.recipient.RecipientListResponse
 import com.advotics.addeen.utils.ErrorCode
 import com.advotics.addeen.utils.PaginationListener
 import java.util.concurrent.atomic.AtomicInteger
@@ -23,12 +24,9 @@ class RecipientPresenter (val mView: RecipientContract.View?, var isDataMissing:
         mView?.addLoadingItem()
 
         RecipientDataRemoteSource.getInstance().getRecipientList(mPageNumber.get(), PaginationListener.PAGE_SIZE, null, year, object: RecipientDataSource.RecipientListCallback {
-            override fun onLoadCallback(data: List<Recipient>) {
-                if (data.isEmpty()) {
-                    isLastPage = true
-                    mView?.removeLoadingItem()
-                    return
-                }
+            override fun onLoadCallback(response: RecipientListResponse) {
+                val data = response.data
+                isLastPage = response?.totalPages == mPageNumber?.incrementAndGet()
 
                 mView?.append(data)
                 mPageNumber.getAndIncrement()
