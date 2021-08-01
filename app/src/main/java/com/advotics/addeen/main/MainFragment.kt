@@ -2,7 +2,6 @@ package com.advotics.addeen.main
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.content.ContextWrapper
 import android.os.Bundle
 import android.os.Environment
 import android.view.View
@@ -152,12 +151,12 @@ class MainFragment: BaseFragment(), MainContract.View {
                     }
 
                     val fileName = "${SimpleDateFormat("YYYYMMDD").format(Date())}.pdf"
-                    val path = generateDownloadedFile(fileName)
+                    val downloadedFile = generateDownloadedFile(fileName)
                     Utility.createPdf(context!!, object: Utility.OnDocumentClose {
                         override fun onPdfDocumentClose(file: File) {
                             Snackbar.make(view!!, ErrorCode.OK_RESULTS.message, Snackbar.LENGTH_LONG).show()
                         }
-                    }, consumeListOfRecipientForDoc(data), path.absolutePath, true)
+                    }, consumeListOfRecipientForDoc(data), downloadedFile, true)
                 }
 
                 override fun onErrorCallback(e: ErrorCode) {
@@ -242,13 +241,13 @@ class MainFragment: BaseFragment(), MainContract.View {
                 }
 
                 val fileName = "${SimpleDateFormat("YYYYMMDD").format(Date())}.pdf"
-                val path = generateDownloadedFile(fileName)
+                val downloadedFile = generateDownloadedFile(fileName)
                 Utility.createPdf(context!!, object: Utility.OnDocumentClose {
                     override fun onPdfDocumentClose(file: File) {
-                        sendReport(fileName)
+                        sendReport(file)
                         Snackbar.make(view!!, "Preparing...", Snackbar.LENGTH_LONG).show()
                     }
-                }, consumeListOfRecipientForDoc(data), path.absolutePath, true)
+                }, consumeListOfRecipientForDoc(data), downloadedFile, true)
             }
 
             override fun onErrorCallback(e: ErrorCode) {
@@ -257,18 +256,11 @@ class MainFragment: BaseFragment(), MainContract.View {
         })
     }
 
-    private fun sendReport (fileName: String) {
-        val root = Environment.getExternalStorageDirectory()
-        val file = File(root, fileName)
-
-        if (!file.exists() || !file.canRead()) {
-            return
-        }
-
+    private fun sendReport (downloadedFile: File) {
         var uri: Uri? = FileProvider.getUriForFile(
             context!!,
             context!!.applicationContext.packageName.toString() + ".provider",
-            file
+            downloadedFile
         )
 
         val user = AppConfiguration.getInstance(context!!).user
@@ -301,10 +293,8 @@ class MainFragment: BaseFragment(), MainContract.View {
     }
 
     private fun generateDownloadedFile (fileName: String): File {
-        val contextWrapper = ContextWrapper(context)
-        val downloadedFile = contextWrapper.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
-
-        return File(downloadedFile, fileName)
+        val path = "${Environment.getExternalStorageDirectory()}/${getString(R.string.app_name)}"
+        return File(path, fileName)
     }
 
     override fun onRequestPermissionsResult(
@@ -316,8 +306,10 @@ class MainFragment: BaseFragment(), MainContract.View {
 
         if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             if (requestCode == 200) {
+                AppHelper.createDownloadedDirectory(activity as AppCompatActivity)
                 prepareReport()
             } else if (requestCode == 300) {
+                AppHelper.createDownloadedDirectory(activity as AppCompatActivity)
                 getFilter().show()
             }
         }

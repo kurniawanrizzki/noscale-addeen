@@ -4,8 +4,8 @@ plugins {
 }
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.3"
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
 
     signingConfigs {
         debug {
@@ -16,7 +16,7 @@ android {
     defaultConfig {
         applicationId "com.advotics.addeen"
         minSdkVersion 24
-        targetSdkVersion 30
+        targetSdkVersion 29
         versionCode 100000
         versionName "1.0.0"
 

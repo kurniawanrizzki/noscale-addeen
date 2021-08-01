@@ -21,11 +21,7 @@ class Utility {
         val FONT_CELL = Font(Font.FontFamily.TIMES_ROMAN, 12F, Font.NORMAL)
         val FONT_COLUMN = Font(Font.FontFamily.TIMES_ROMAN, 14F, Font.NORMAL)
 
-        fun createPdf (context: Context, callback: OnDocumentClose, items: List<Array<String?>>, filePath: String, isPortrait: Boolean) {
-            if (filePath.isEmpty()) throw NullPointerException("PDF File name can\'t be NULL or blank. PDF file can\'t be created")
-
-            val file = File(filePath)
-
+        fun createPdf (context: Context, callback: OnDocumentClose, items: List<Array<String?>>, file: File, isPortrait: Boolean) {
             if (file.exists()) {
                 file.delete()
                 Thread.sleep(50)
@@ -35,7 +31,7 @@ class Utility {
             document.setMargins(24f, 24f, 32f, 32f)
             document.pageSize = if (isPortrait) PageSize.A4 else PageSize.A4.rotate()
 
-            val writer = PdfWriter.getInstance(document, FileOutputStream(filePath))
+            val writer = PdfWriter.getInstance(document, FileOutputStream(file.absoluteFile))
             writer.setFullCompression()
             writer.pageEvent = PageNumeration()
 
