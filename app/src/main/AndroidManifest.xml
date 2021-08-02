@@ -59,6 +59,16 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".details.DetailActivity"
+            android:screenOrientation="portrait">
+
+            <intent-filter>
+                <action android:name="com.noscale.addeen.recipient.detail.open"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+
+        </activity>
+
         <activity android:name=".SplashActivity"
             android:screenOrientation="portrait"
             >

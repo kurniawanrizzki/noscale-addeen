@@ -1,9 +1,12 @@
 package com.advotics.addeen.data
 
+import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
-data class RecipientPackage(
+@Parcelize
+class RecipientPackage(
     @SerializedName("packageId")
     @Expose
     val id: Int,
@@ -27,4 +30,4 @@ data class RecipientPackage(
     @SerializedName("updatedAt")
     @Expose
     val updatedAt: String
-)
+): Parcelable

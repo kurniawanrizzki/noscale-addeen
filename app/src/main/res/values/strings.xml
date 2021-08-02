@@ -6,6 +6,7 @@
     <string name="login_email">Email</string>
     <string name="login_password">Password</string>
     <string name="login_gender">Gender</string>
+    <string name="login_status">Status</string>
     <string name="login_phone">Phone</string>
     <string name="login_button">Login</string>
     <string name="login_as_admin">Login as Admin</string>
@@ -47,6 +48,8 @@
 
     <string name="menu_report">Send Report</string>
     <string name="menu_filter">Filter</string>
+
+    <string name="menu_detail">Detail</string>
 
     <string-array name="form_gender">
         <item>Male</item>

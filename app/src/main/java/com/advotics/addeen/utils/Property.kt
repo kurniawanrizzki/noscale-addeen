@@ -11,6 +11,8 @@ object Property {
 
     const val ADMIN_CREATION_ARG = "ADMIN_CREATION_ARG"
 
+    const val RECIPIENT_ARG = "RECIPIENT_ARG"
+
     enum class ProfileMenu (val icon: Int, val title: Int) {
         ABOUT_US (R.drawable.ic_profile, R.string.profile_about_us), MAJLIS_ACTIVITIES (R.drawable.ic_profile, R.string.profile_activities), LOG_OUT (R.drawable.ic_profile, R.string.profile_logout)
     }

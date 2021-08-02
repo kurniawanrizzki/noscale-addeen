@@ -33,8 +33,15 @@ class RecipientFragment: BaseFragment(), RecipientContract.View {
             val tvName = holder?.itemView?.findViewById<ExtendedTextView>(R.id.tv_user_name)
             val tvRole = holder?.itemView?.findViewById<ExtendedTextView>(R.id.tv_user_description)
 
+            holder?.itemView?.setOnClickListener {
+                item?.let {
+                    val intent = Actions.openRecipientDetailIntent(context!!, it)
+                    startActivity(intent)
+                }
+            }
+
             tvName?.text = item?.name
-            tvRole?.text = readStatusPackage(item?.recipientPackage)
+            tvRole?.text = "${readStatusPackage(item?.recipientPackage)} - ${item?.year}"
             Picasso.get()
                 .load(item?.photo)
                 .placeholder(ContextCompat.getDrawable(context!!, R.drawable.ic_user_profile)!!)

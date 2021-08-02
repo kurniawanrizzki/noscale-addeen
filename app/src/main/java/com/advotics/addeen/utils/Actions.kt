@@ -2,6 +2,7 @@ package com.advotics.addeen.utils
 
 import android.content.Context
 import android.content.Intent
+import com.advotics.addeen.data.Recipient
 
 object Actions {
     fun openLoginIntent(context: Context) = internalIntent(context, "com.noscale.addeen.login.open")
@@ -14,6 +15,9 @@ object Actions {
 
     fun openCreationIntent (context: Context, isCreationAdmin: Boolean) = internalIntent(context, "com.noscale.addeen.creation.open")
         .putExtra(Property.ADMIN_CREATION_ARG, isCreationAdmin)
+
+    fun openRecipientDetailIntent (context: Context, recipient: Recipient) = internalIntent(context,"com.noscale.addeen.recipient.detail.open")
+        .putExtra(Property.RECIPIENT_ARG, recipient)
 
     private fun internalIntent(context: Context, action: String): Intent = Intent(action).setPackage(context.packageName)
 }
