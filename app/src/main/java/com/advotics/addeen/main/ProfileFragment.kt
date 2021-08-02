@@ -6,6 +6,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.advotics.addeen.R
+import com.advotics.addeen.data.Admin
 import com.advotics.addeen.data.Recipient
 import com.advotics.addeen.utils.*
 import com.noscale.cerberus.base.BaseFragment
@@ -25,6 +26,19 @@ class ProfileFragment: BaseFragment(), MainContract.View {
         val ivProfile = view.findViewById<AppCompatImageView>(R.id.iv_profile_photo)
         val tvInfo = view.findViewById<ExtendedTextView>(R.id.tv_profile_info)
         val rvMenu = view.findViewById<RecyclerView>(R.id.rv_profile_menu)
+
+        tvInfo?.let {
+            val user = AppConfiguration.getInstance(context!!).user
+            val isAdmin = AppConfiguration.getInstance(context!!).isAdmin
+            if (isAdmin) {
+                val admin = AppHelper.fromJson<Admin>(user!!)
+                it.text = admin.name
+            } else {
+                val recipient = AppHelper.fromJson<Recipient>(user!!)
+                it.text = recipient.name
+            }
+        }
+
         rvMenu.adapter = SimpleRecyclerAdapter(menus, R.layout.item_profile_menu, object: SimpleRecyclerAdapter.OnViewHolder<Property.ProfileMenu> {
             override fun onBindView(
                 holder: SimpleRecyclerAdapter.SimpleViewHolder?,

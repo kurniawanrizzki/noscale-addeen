@@ -26,6 +26,7 @@
         app:tabIndicatorHeight="0dp"
         app:tabMaxWidth="0dp"
         app:tabMode="fixed"
+        app:tabTextAppearance="@style/TabLayout.TextAppearance"
         />
 
 </LinearLayout>

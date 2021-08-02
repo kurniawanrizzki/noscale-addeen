@@ -19,6 +19,7 @@
     <string name="error_required_input">%1$s field is required.</string>
     <string name="error_email_format">Please enter your email address</string>
     <string name="error_phone_format">Value must be in Indonesia mobile number format eg. 6281911111111</string>
+    <string name="error_photo_required">You need to take selfie first before submission</string>
 
     <string name="progress_title">Loading</string>
     <string name="progress_description">Please wait. It may take a while</string>

@@ -26,6 +26,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
 import com.noscale.cerberus.base.BaseFragment
 import com.noscale.cerberus.ui.layouts.ConstraintWithIllustrationLayout
+import com.noscale.cerberus.ui.typography.ExtendedTextView
 import com.noscale.cerberus.ui.widgets.IllustrationView
 import java.util.regex.Pattern
 
@@ -87,8 +88,9 @@ class CreationFragment: BaseFragment(), CreationContract.View {
             val isNameFilled = isInputValidated(ilName)
             val isEmailFilled = isEmailValidated(ilEmail)
             val isPhoneFilled = isPhoneNumberValidated(ilPhone)
+            val isTakeSelfie = isSelfieValidated()
 
-            if (isNameFilled && isEmailFilled && isPhoneFilled && (null != capturedPhoto)) {
+            if (isNameFilled && isEmailFilled && isPhoneFilled && isTakeSelfie) {
                 mIllustrationView?.visibility = View.VISIBLE
                 view?.visibility = View.GONE
 
@@ -195,6 +197,17 @@ class CreationFragment: BaseFragment(), CreationContract.View {
         return true
     }
 
+    private fun isSelfieValidated (): Boolean {
+        val tvError = view?.findViewById<ExtendedTextView>(R.id.tv_recipient_null_photo)
+        if (null != capturedPhoto) {
+            tvError?.visibility = View.GONE
+            return true
+        }
+
+        tvError?.visibility = View.VISIBLE
+        return false
+    }
+
     private fun isPhoneNumberValidated (v: TextInputLayout): Boolean {
         v.editText?.text?.let {
             val pattern = Pattern.compile("62\\d{9,11}")
@@ -232,6 +245,7 @@ class CreationFragment: BaseFragment(), CreationContract.View {
             val ivCapture = view?.findViewById<AppCompatImageView>(R.id.iv_recipient_photo)
 
             ivCapture?.setImageBitmap(capturedPhoto)
+            isSelfieValidated()
         }
     }
 

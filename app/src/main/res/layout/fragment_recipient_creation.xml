@@ -44,11 +44,25 @@
                     android:layout_width="@dimen/_170sdp"
                     android:layout_height="@dimen/_170sdp"
                     android:layout_marginTop="@dimen/_13sdp"
+                    android:layout_marginBottom="@dimen/_7sdp"
                     android:adjustViewBounds="true"
                     app:srcCompat="@drawable/ic_photo"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_recipient_picker"
+                    />
+
+                <com.noscale.cerberus.ui.typography.ExtendedTextView
+                    android:id="@+id/tv_recipient_null_photo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_recipient_photo"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:textColor="@color/design_default_color_error"
+                    android:text="@string/error_photo_required"
+                    app:typography="caption"
+                    android:visibility="gone"
                     />
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -59,7 +73,7 @@
                     android:hint="@string/login_name"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/iv_recipient_photo"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_recipient_null_photo"
                     app:errorEnabled="true"
                     >
 

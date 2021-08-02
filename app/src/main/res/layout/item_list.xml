@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.noscale.cerberus.ui.typography.ExtendedTextView
+<TextView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/tv_item_text"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:padding="@dimen/_7sdp"
     android:ellipsize="end"
     android:singleLine="true"
-    app:typography="subtitle_1"
+    style="@style/TextAppearance.MaterialComponents.Subtitle1"
     />
