@@ -9,6 +9,7 @@ import com.advotics.addeen.main.MainContract
 import com.advotics.addeen.utils.Actions
 import com.advotics.addeen.utils.AppConfiguration
 import com.advotics.addeen.utils.Property
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.noscale.cerberus.base.BaseActivity
 import com.noscale.cerberus.ui.typography.ExtendedTextView
 
@@ -44,11 +45,24 @@ class OtherActivity: BaseActivity<MainContract.View, MainContract.Presenter>() {
 
         when (v) {
             R.string.profile_logout -> {
-                val intent = Actions.openLoginIntent(this)
-                AppConfiguration.getInstance(this).user = null
+                MaterialAlertDialogBuilder(OtherActivity@this)
+                    .setTitle(getString(R.string.logout_title))
+                    .setMessage(getString(R.string.logout_message))
+                    .setPositiveButton(getString(R.string.dialog_accept)) { dialog, _ ->
+                        dialog.dismiss()
 
-                startActivity(intent)
-                finish()
+                        val intent = Actions.openLoginIntent(this)
+                        AppConfiguration.getInstance(this).user = null
+
+                        startActivity(intent)
+                        finish()
+                    }
+                    .setNegativeButton(getString(R.string.dialog_decline)) { dialog, _ ->
+                        dialog.dismiss()
+                        onBackPressed()
+                    }
+                    .setCancelable(false)
+                    .show()
                 return v
             }
             R.string.profile_about_us -> mArguments?.putInt(Property.PROFILE_MENU_RES_ARG, R.layout.fragment_about_us)

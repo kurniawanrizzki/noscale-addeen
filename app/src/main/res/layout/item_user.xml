@@ -20,16 +20,26 @@
         android:paddingRight="@dimen/_13sdp"
         >
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_user_profile"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/iv_user_profile_wrapper"
             android:layout_width="@dimen/_26sdp"
             android:layout_height="@dimen/_26sdp"
-            android:adjustViewBounds="true"
+            android:elevation="@dimen/_10sdp"
+            app:cardCornerRadius="@dimen/_13sdp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:srcCompat="@drawable/ic_user_profile"
-            />
+            >
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_user_profile"
+                android:layout_width="@dimen/_26sdp"
+                android:layout_height="@dimen/_26sdp"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/ic_user_profile"
+                />
+
+        </androidx.cardview.widget.CardView>
 
         <com.noscale.cerberus.ui.typography.ExtendedTextView
             android:id="@+id/tv_user_name"
@@ -37,7 +47,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginLeft="@dimen/_13sdp"
-            app:layout_constraintLeft_toRightOf="@id/iv_user_profile"
+            app:layout_constraintLeft_toRightOf="@id/iv_user_profile_wrapper"
             app:typography="subtitle_1"
             tools:text="@tools:sample/lorem"
             />
@@ -60,7 +70,7 @@
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@id/iv_user_profile"
+            app:layout_constraintTop_toTopOf="@id/iv_user_profile_wrapper"
             app:srcCompat="@drawable/ic_delete"
             android:visibility="gone"
             />

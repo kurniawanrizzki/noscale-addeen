@@ -53,6 +53,8 @@
     <string name="menu_detail">Detail</string>
     <string name="general_try_again">Try Again</string>
 
+    <string name="logout_title">Log Out</string>
+    <string name="logout_message">Do you want to log out ?</string>
     <string name="deletion_title">Deletion</string>
     <string name="deletion_message">Do you want to delete %1$s ?</string>
     <string name="dialog_accept">Accept</string>
