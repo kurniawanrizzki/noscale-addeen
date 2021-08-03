@@ -37,7 +37,7 @@ class AppConfiguration (mContext: Context) {
             val item = iData.next()
 
             if (admin?.name?.equals(item.name, ignoreCase = true)!!
-                || isSuperAdmin()) iData?.remove()
+                || SUPER_ADMIN_CONST == item.id) iData?.remove()
         }
     }
 
@@ -46,7 +46,7 @@ class AppConfiguration (mContext: Context) {
 
         const val USER_KEY = "USER_KEY"
 
-        const val SUPER_ADMIN_CONST = 14
+        const val SUPER_ADMIN_CONST = 1
 
         @Volatile
         private var instance: AppConfiguration? = null
