@@ -1,5 +1,6 @@
 package com.advotics.addeen.user
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.widget.AppCompatImageView
@@ -16,6 +17,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.noscale.cerberus.base.BaseFragment
 import com.noscale.cerberus.ui.layouts.ConstraintWithIllustrationLayout
 import com.noscale.cerberus.ui.typography.ExtendedTextView
+import com.noscale.cerberus.ui.widgets.IllustrationView
 
 class UserFragment: BaseFragment(), UserContract.View {
 
@@ -55,7 +57,7 @@ class UserFragment: BaseFragment(), UserContract.View {
 
         fab?.setOnClickListener {
             val intent = Actions.openCreationIntent(context!!, true)
-            startActivity(intent)
+            startActivityForResult(intent, 103)
         }
 
         rvData.adapter = mAdapter
@@ -65,7 +67,10 @@ class UserFragment: BaseFragment(), UserContract.View {
         removeLoadingItem()
 
         val container = view as ConstraintWithIllustrationLayout
+        val illustrationView = container.findViewById<IllustrationView>(R.id.cwi_illustration_id)
         container.setIllustrationVisibility(false)
+
+        illustrationView?.mTryAgainButton?.visibility = View.GONE
 
         val position = mAdapter.itemCount
 
@@ -84,7 +89,11 @@ class UserFragment: BaseFragment(), UserContract.View {
 
     override fun throwError(message: String) {
         val container = view as ConstraintWithIllustrationLayout
+        val illustrationView = container.findViewById<IllustrationView>(R.id.cwi_illustration_id)
+
         container.setIllustrationVisibility(false)
+        illustrationView?.mTryAgainButton?.visibility = View.VISIBLE
+        illustrationView?.mTryAgainButton?.setOnClickListener { mPresenter?.fetch() }
 
         showEmptyPage()
         view?.let {
@@ -102,6 +111,12 @@ class UserFragment: BaseFragment(), UserContract.View {
     override fun removeLoadingItem() {
         isPageScrolled = false
         mAdapter?.removeLoading()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == 103) mPresenter?.reset()
     }
 
     companion object {

@@ -16,5 +16,6 @@ interface UserContract {
         var isLastPage: Boolean
 
         fun fetch ()
+        fun reset ()
     }
 }

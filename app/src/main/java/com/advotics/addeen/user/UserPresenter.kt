@@ -41,6 +41,13 @@ class UserPresenter (val mView: UserContract.View?, var isDataMissing: Boolean):
         })
     }
 
+    override fun reset() {
+        isLastPage = false
+        mPageNumber.set(0)
+
+        fetch()
+    }
+
     override fun start() {
         if (isDataMissing) fetch()
     }

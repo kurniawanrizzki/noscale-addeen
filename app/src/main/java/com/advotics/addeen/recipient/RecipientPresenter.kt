@@ -40,6 +40,13 @@ class RecipientPresenter (val mView: RecipientContract.View?, var isDataMissing:
         })
     }
 
+    override fun reset() {
+        isLastPage = false
+        mPageNumber.set(0)
+
+        fetch()
+    }
+
     override fun start() {
         if (isDataMissing) fetch()
     }

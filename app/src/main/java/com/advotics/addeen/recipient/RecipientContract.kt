@@ -17,5 +17,6 @@ interface RecipientContract {
         var year: Int?
 
         fun fetch ()
+        fun reset ()
     }
 }

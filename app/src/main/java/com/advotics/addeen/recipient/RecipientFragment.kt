@@ -1,5 +1,6 @@
 package com.advotics.addeen.recipient
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.widget.AppCompatImageView
@@ -18,6 +19,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.noscale.cerberus.base.BaseFragment
 import com.noscale.cerberus.ui.layouts.ConstraintWithIllustrationLayout
 import com.noscale.cerberus.ui.typography.ExtendedTextView
+import com.noscale.cerberus.ui.widgets.IllustrationView
 import com.squareup.picasso.Picasso
 
 class RecipientFragment: BaseFragment(), RecipientContract.View {
@@ -68,7 +70,7 @@ class RecipientFragment: BaseFragment(), RecipientContract.View {
 
         fab?.setOnClickListener {
             val intent = Actions.openCreationIntent(context!!, false)
-            startActivity(intent)
+            startActivityForResult(intent, 103)
         }
 
         rvData.adapter = mAdapter
@@ -78,7 +80,10 @@ class RecipientFragment: BaseFragment(), RecipientContract.View {
         removeLoadingItem()
 
         val container = view as ConstraintWithIllustrationLayout
+        val illustrationView = container.findViewById<IllustrationView>(R.id.cwi_illustration_id)
+
         container.setIllustrationVisibility(false)
+        illustrationView?.mTryAgainButton?.visibility = View.GONE
 
         val position = mAdapter.itemCount
 
@@ -97,7 +102,11 @@ class RecipientFragment: BaseFragment(), RecipientContract.View {
 
     override fun throwError(message: String) {
         val container = view as ConstraintWithIllustrationLayout
+        val illustrationView = container.findViewById<IllustrationView>(R.id.cwi_illustration_id)
+
         container.setIllustrationVisibility(false)
+        illustrationView?.mTryAgainButton?.visibility = View.VISIBLE
+        illustrationView?.mTryAgainButton?.setOnClickListener { mPresenter?.fetch() }
 
         showEmptyPage()
         view?.let {
@@ -127,6 +136,12 @@ class RecipientFragment: BaseFragment(), RecipientContract.View {
         }
 
         return getString(R.string.status_register)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == 103) mPresenter?.reset()
     }
 
     companion object {

@@ -51,9 +51,12 @@
     <string name="menu_filter">Filter</string>
 
     <string name="menu_detail">Detail</string>
+    <string name="general_try_again">Try Again</string>
 
     <string-array name="form_gender">
         <item>Male</item>
         <item>Female</item>
     </string-array>
+
+    <item name="b_iv_try_again" type="id"/>
 </resources>
