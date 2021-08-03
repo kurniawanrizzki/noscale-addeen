@@ -24,6 +24,6 @@ abstract class PaginationListener(val layoutManager: LinearLayoutManager): Recyc
     protected abstract fun isLoading (): Boolean
 
     companion object {
-        val PAGE_SIZE: Int = 5
+        val PAGE_SIZE: Int = 100
     }
 }
