@@ -6,10 +6,12 @@ import com.noscale.cerberus.base.BaseView
 
 interface UserContract {
     interface View: BaseView<Presenter> {
-        fun append (data: List<Admin>)
+        fun append (data: MutableList<Admin>?)
         fun throwError (message: String)
+        fun throwError (message: String, deletion: Boolean)
         fun addLoadingItem ()
         fun removeLoadingItem ()
+        fun removeItem (i: Admin)
     }
 
     interface Presenter: BasePresenter {
@@ -17,5 +19,6 @@ interface UserContract {
 
         fun fetch ()
         fun reset ()
+        fun delete (admin: Admin)
     }
 }

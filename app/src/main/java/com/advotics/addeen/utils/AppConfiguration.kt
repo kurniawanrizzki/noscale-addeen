@@ -2,6 +2,7 @@ package com.advotics.addeen.utils
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.advotics.addeen.data.Admin
 
 class AppConfiguration (mContext: Context) {
 
@@ -16,6 +17,20 @@ class AppConfiguration (mContext: Context) {
         get() = mPreference?.getString(USER_KEY, null)
 
     var isAdmin: Boolean = user?.contains("admin") ?: false
+
+    fun excludeUser (data: MutableList<Admin>?) {
+        if (null == data) return
+
+        val admin = AppHelper.fromJson<Admin>(user!!)
+        val iData = data.iterator()
+
+        while (iData.hasNext()) {
+            val item = iData.next()
+
+            if (admin?.name?.equals(item.name, ignoreCase = true)!!
+                || item.name?.equals("Admin1", ignoreCase = true)!!) iData?.remove()
+        }
+    }
 
     companion object {
         const val PREFERENCE_NAME_KEY = "ADDEEN_APP"

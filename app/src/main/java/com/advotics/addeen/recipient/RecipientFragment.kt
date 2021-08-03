@@ -119,11 +119,15 @@ class RecipientFragment: BaseFragment(), RecipientContract.View {
     override fun addLoadingItem() {
         isPageScrolled = true
         mAdapter?.addLoading(Recipient())
+
+        mAdapter?.notifyDataSetChanged()
     }
 
     override fun removeLoadingItem() {
         isPageScrolled = false
         mAdapter?.removeLoading()
+
+        mAdapter?.notifyDataSetChanged()
     }
 
     private fun readStatusPackage (r: RecipientPackage?): String? {

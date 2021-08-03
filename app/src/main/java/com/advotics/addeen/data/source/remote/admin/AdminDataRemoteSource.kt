@@ -38,6 +38,25 @@ class AdminDataRemoteSource: AdminDataSource {
         })
     }
 
+    override fun delete(id: Int, callback: AdminDataSource.AdminDeletionCallback) {
+        val response = APIService.getInstance()?.mAdminApi?.delete(id)
+        response?.enqueue(object: Callback<okhttp3.ResponseBody> {
+            override fun onResponse(
+                call: Call<okhttp3.ResponseBody>,
+                response: Response<okhttp3.ResponseBody>
+            ) {
+
+                if (response.isSuccessful) callback.onSuccessDeletion()
+                else callback.onErrorCallback(ErrorCode.INTERNAL_SERVER_ERROR)
+            }
+
+            override fun onFailure(call: Call<okhttp3.ResponseBody>, t: Throwable) {
+                callback.onErrorCallback(ErrorCode.STATUS_NO_CONNECTION)
+            }
+
+        })
+    }
+
     companion object {
         fun getInstance(): AdminDataRemoteSource = AdminDataRemoteSource()
     }

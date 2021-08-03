@@ -35,7 +35,7 @@ class UserPresenter (val mView: UserContract.View?, var isDataMissing: Boolean):
             }
 
             override fun onErrorCallback(e: ErrorCode) {
-                mView?.throwError(e.message)
+                mView?.throwError(e.message, false)
             }
 
         })
@@ -46,6 +46,18 @@ class UserPresenter (val mView: UserContract.View?, var isDataMissing: Boolean):
         mPageNumber.set(0)
 
         fetch()
+    }
+
+    override fun delete(admin: Admin) {
+        AdminDataRemoteSource.getInstance().delete(admin.id, object: AdminDataSource.AdminDeletionCallback {
+            override fun onSuccessDeletion() {
+                mView?.removeItem(admin)
+            }
+
+            override fun onErrorCallback(e: ErrorCode) {
+                mView?.throwError(e.message)
+            }
+        })
     }
 
     override fun start() {

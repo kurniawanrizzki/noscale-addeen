@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
 data class AdminListResponse(
     @SerializedName("content")
     @Expose
-    val data: List<Admin>?,
+    val data: MutableList<Admin>?,
 
     @SerializedName("totalPages")
     @Expose

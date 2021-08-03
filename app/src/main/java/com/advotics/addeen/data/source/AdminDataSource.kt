@@ -10,5 +10,12 @@ interface AdminDataSource {
         fun onErrorCallback (e: ErrorCode)
     }
 
+    interface AdminDeletionCallback {
+        fun onSuccessDeletion ()
+        fun onErrorCallback (e: ErrorCode)
+    }
+
     fun getAdminList (pageNumber: Int, pageSize: Int, callback: AdminListCallback)
+
+    fun delete (id: Int, callback: AdminDeletionCallback)
 }
