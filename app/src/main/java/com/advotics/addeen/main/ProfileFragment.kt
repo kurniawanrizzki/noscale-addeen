@@ -24,10 +24,10 @@ class ProfileFragment: BaseFragment(), MainContract.View {
         val menus = Property.ProfileMenu.values().toMutableList()
 
         val ivProfile = view.findViewById<AppCompatImageView>(R.id.iv_profile_photo)
-        val tvInfo = view.findViewById<ExtendedTextView>(R.id.tv_profile_info)
+        val tvAccount = view.findViewById<ExtendedTextView>(R.id.tv_profile_name)
         val rvMenu = view.findViewById<RecyclerView>(R.id.rv_profile_menu)
 
-        tvInfo?.let {
+        tvAccount?.let {
             val user = AppConfiguration.getInstance(context!!).user
             val isAdmin = AppConfiguration.getInstance(context!!).isAdmin
             if (isAdmin) {
@@ -60,6 +60,8 @@ class ProfileFragment: BaseFragment(), MainContract.View {
                 .load(item.photo)
                 .placeholder(ContextCompat.getDrawable(context!!, R.drawable.ic_user_profile)!!)
                 .into(ivProfile)
+
+            showStatusInfo(item)
         }
     }
 
@@ -68,6 +70,26 @@ class ProfileFragment: BaseFragment(), MainContract.View {
         if (user?.contains("recipient")!!) return AppHelper.fromJson(user)
 
         return null
+    }
+
+    private fun showStatusInfo (recipient: Recipient) {
+        val tvInfo = view?.findViewById<ExtendedTextView>(R.id.tv_profile_info)
+
+        tvInfo?.let {
+            it.visibility = View.VISIBLE
+
+            if (recipient.recipientPackage?.qrSentStatus!! && recipient?.recipientPackage?.packageReceivedStatus) {
+                it.text = getString(R.string.redeem_description)
+            } else if (recipient.recipientPackage?.qrSentStatus!!) {
+                it.text = getString(R.string.qr_sent_description)
+            } else {
+                it.text = getString(R.string.register_description)
+            }
+
+            return
+        }
+
+        tvInfo?.visibility = View.GONE
     }
 
     companion object {

@@ -58,6 +58,10 @@
     <string name="dialog_accept">Accept</string>
     <string name="dialog_decline">Decline</string>
 
+    <string name="redeem_description">Terima kasih, Anda sudah mengambil daging Qurban.</string>
+    <string name="qr_sent_description">Silahkan ambil daging Qurban dengan menunjukan QR Code yg sudah dikirimkan.</string>
+    <string name="register_description">QR Code tidak ditemukan. Silahkan hubungi pihak kami untuk tindakan lebih lanjut.</string>
+
     <string-array name="form_gender">
         <item>Male</item>
         <item>Female</item>

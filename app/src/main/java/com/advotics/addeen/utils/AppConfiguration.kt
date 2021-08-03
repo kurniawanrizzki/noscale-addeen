@@ -18,6 +18,15 @@ class AppConfiguration (mContext: Context) {
 
     var isAdmin: Boolean = user?.contains("admin") ?: false
 
+    fun isSuperAdmin (): Boolean {
+        if (isAdmin) {
+            val admin = AppHelper.fromJson<Admin>(user!!)
+            return admin?.id == SUPER_ADMIN_CONST
+        }
+
+        return false
+    }
+
     fun excludeUser (data: MutableList<Admin>?) {
         if (null == data) return
 
@@ -28,7 +37,7 @@ class AppConfiguration (mContext: Context) {
             val item = iData.next()
 
             if (admin?.name?.equals(item.name, ignoreCase = true)!!
-                || item.name?.equals("Admin1", ignoreCase = true)!!) iData?.remove()
+                || isSuperAdmin()) iData?.remove()
         }
     }
 
@@ -36,6 +45,8 @@ class AppConfiguration (mContext: Context) {
         const val PREFERENCE_NAME_KEY = "ADDEEN_APP"
 
         const val USER_KEY = "USER_KEY"
+
+        const val SUPER_ADMIN_CONST = 14
 
         @Volatile
         private var instance: AppConfiguration? = null

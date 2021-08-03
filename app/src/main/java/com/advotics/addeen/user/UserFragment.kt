@@ -34,7 +34,8 @@ class UserFragment: BaseFragment(), UserContract.View {
 
             tvName?.text = item?.name
             tvRole?.text = "Admin"
-            ivDelete?.visibility = View.VISIBLE
+            ivDelete?.visibility = if (AppConfiguration.getInstance(context!!).isSuperAdmin()!!) View.VISIBLE
+            else View.GONE
 
             ivDelete?.setOnClickListener {
                 MaterialAlertDialogBuilder(context!!)
