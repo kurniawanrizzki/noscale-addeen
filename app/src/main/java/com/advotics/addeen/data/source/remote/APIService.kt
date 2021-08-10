@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class APIService {
 
-    private val BASE_URL = "http://34.101.167.168/qris-qurban-service/"
+    private val BASE_URL = "http://34.101.197.235/qris-qurban-service/"
 
     val mLoginApi: LoginApi
 

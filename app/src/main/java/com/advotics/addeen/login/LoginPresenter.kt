@@ -1,7 +1,7 @@
 package com.advotics.addeen.login
 
 import com.advotics.addeen.data.Admin
-import com.advotics.addeen.data.Recipient
+import com.advotics.addeen.data.RecipientWrapper
 import com.advotics.addeen.data.source.LoginDataSource
 import com.advotics.addeen.data.source.remote.login.LoginRemoteDataSource
 import com.advotics.addeen.utils.AppHelper
@@ -32,8 +32,8 @@ class LoginPresenter(private val mView: LoginContract.View?): LoginContract.Pres
             return
         }
 
-        LoginRemoteDataSource.getInstance().recipientLogin(email, password, object: LoginDataSource.LoginCallback<Recipient> {
-            override fun onLoginSuccess(r: Recipient) {
+        LoginRemoteDataSource.getInstance().recipientLogin(email, password, object: LoginDataSource.LoginCallback<RecipientWrapper> {
+            override fun onLoginSuccess(r: RecipientWrapper) {
                 val result = AppHelper.toJson(r)
                 mView?.goToDashboard(result)
             }

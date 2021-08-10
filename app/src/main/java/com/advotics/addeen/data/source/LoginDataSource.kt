@@ -1,7 +1,7 @@
 package com.advotics.addeen.data.source
 
 import com.advotics.addeen.data.Admin
-import com.advotics.addeen.data.Recipient
+import com.advotics.addeen.data.RecipientWrapper
 import com.advotics.addeen.utils.ErrorCode
 
 interface LoginDataSource {
@@ -11,7 +11,7 @@ interface LoginDataSource {
         fun onLoginFailure (code: ErrorCode)
     }
 
-    fun recipientLogin (email: String, password: String, callback: LoginCallback<Recipient>)
+    fun recipientLogin (email: String, password: String, callback: LoginCallback<RecipientWrapper>)
 
     fun adminLogin (email: String, password: String, callback: LoginCallback<Admin>)
 }

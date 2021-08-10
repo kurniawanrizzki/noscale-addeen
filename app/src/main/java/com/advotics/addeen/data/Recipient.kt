@@ -51,5 +51,5 @@ class Recipient(
     @Expose
     val updatedAt: String?
 ): Parcelable {
-    constructor() : this (0, "", "", "", "", "", "", "", null, "", "")
+    constructor() : this (0, "", "", "", "", "", "", "", null,"", "")
 }

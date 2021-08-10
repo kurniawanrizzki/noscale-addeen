@@ -64,6 +64,12 @@
     <string name="qr_sent_description">Silahkan ambil daging Qurban dengan menunjukan QR Code yg sudah dikirimkan.</string>
     <string name="register_description">QR Code tidak ditemukan. Silahkan hubungi pihak kami untuk tindakan lebih lanjut.</string>
 
+    <string name="total_recipients">Recipient</string>
+    <string name="total_redemption">Redeemed</string>
+    <string name="total_sent">Sent</string>
+    <string name="total_prefix">%1$d Recipient(s)</string>
+    <string name="total_details">Details</string>
+
     <string-array name="form_gender">
         <item>Male</item>
         <item>Female</item>
